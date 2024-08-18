@@ -1,0 +1,170 @@
+symm_check:-
+import numpy as np
+
+def get_matrix():
+    order = int(input("Enter order of Square matrix: "))
+    matrix = np.zeros((order, order))
+    print(f"Enter elements of {order}x{order} matrix Rowwise\n")
+    for i in range(order):
+        print("Enter elements in Row (sep by space) ", i+1, ": ")
+        row = [float(num) for num in input().split()]
+        matrix[i] = row
+    return matrix
+
+def print_matrix(matrix):
+    for row in matrix:
+        print(" ".join(f"{num:.4f}" for num in row))
+
+def check_symmetric(matrix):
+    transpose = matrix.T
+    print("The Transpose of A is:")
+    print_matrix(transpose)
+    if np.allclose(matrix, transpose):
+        print("Yes Symmetric")
+    else:
+        print("Not Symmetric")
+
+# Main
+matrix = get_matrix()
+print("The input matrix is:")
+print_matrix(matrix)
+
+print("Checking if symmetric:")
+check_symmetric(matrix)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+orthogonal check:-
+import numpy as np
+
+def get_matrix():
+    order = int(input("Enter order of Square matrix: "))
+    matrix = np.zeros((order, order))
+    print(f"Enter elements of {order}x{order} matrix Rowwise\n")
+    for i in range(order):
+        print("Enter elements in Row (sep by space) ", i+1, ": ")
+        row = [float(num) for num in input().split()]
+        matrix[i] = row
+    return matrix
+
+def print_matrix(matrix):
+    for row in matrix:
+        print(" ".join(f"{num:.4f}" for num in row))
+
+def check_orthogonal(matrix):
+    transpose = matrix.T
+    product = matrix @ transpose
+    print("If A^T = A^-1 it is orthogonal")
+    print("i.e A.A^T = I")
+    print_matrix(product)
+    
+    if np.allclose(product, np.eye(matrix.shape[0])):
+        print("Yes Orthogonal")
+    else:
+        print("Not Orthogonal")
+
+# Main
+matrix = get_matrix()
+print("The input matrix is:")
+print_matrix(matrix)
+
+print("Checking if symmetric:")
+transpose = matrix.T
+if np.allclose(matrix, transpose):
+    print("Yes Symmetric")
+else:
+    print("Not Symmetric")
+
+print("Checking if orthogonal:")
+check_orthogonal(matrix)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+jacobi eig:-
+import numpy as np
+
+def get_matrix():
+    order = int(input("Enter order of Square matrix: "))
+    matrix = np.zeros((order, order))
+    print(f"Enter elements of {order}x{order} matrix Rowwise\n")
+    for i in range(order):
+        for j in range(order):
+            print(f"Enter element [{i+1}][{j+1}] : ")
+            matrix[i, j] = float(input())
+    return matrix
+
+def print_matrix(matrix):
+    for row in matrix:
+        print(" ".join(f"{num:.4f}" for num in row))
+
+def check_symmetric(matrix):
+    transpose = matrix.T
+    flag = 1
+    print("The Transpose of A is:")
+    print_matrix(transpose)
+    if np.allclose(matrix, transpose):
+        print("Yes Symmetric")
+    else:
+        print("Not Symmetric")
+        flag = 0
+    return flag
+
+def jacobi_method(A, tol=0, max_iter=100):
+    A = np.copy(A)
+    n = A.shape[0]
+    R = np.eye(n)
+
+    for _ in range(max_iter):
+        # Find the largest off-diagonal absolute value
+        off_diag_max = 0
+        p, q = 0, 1
+        for i in range(n):
+            for j in range(i+1, n):
+                if abs(A[i, j]) > off_diag_max:
+                    off_diag_max = abs(A[i, j])
+                    p, q = i, j
+
+        if off_diag_max == tol:
+            break
+
+        if A[p, p] == A[q, q]:
+            theta = np.pi / 4 if A[p, q] > 0 else -np.pi / 4
+        else:
+            theta = 0.5 * np.arctan2(2 * A[p, q], A[q, q] - A[p, p])
+        cos_theta = round(np.cos(theta), 4)
+        sin_theta = round(np.sin(theta), 4)
+
+        J = np.eye(n)
+        J[p, p] = cos_theta
+        J[p, q] = -sin_theta
+        J[q, p] = sin_theta
+        J[q, q] = cos_theta
+
+        # Update A and R
+        A = np.round(J.T @ A @ J, 4)
+        R = np.round(R @ J, 4)
+
+    eigenvalues = np.diag(A)
+    eigenvectors = R
+
+    return eigenvalues, eigenvectors
+
+# Main
+matrix = get_matrix()
+print("\nThe input matrix is:\n")
+print_matrix(matrix)
+
+print("\nChecking if symmetric:\n")
+flag = check_symmetric(matrix)
+
+if flag:
+    print("JACOBI\n")
+    eigenvalues, eigenvectors = jacobi_method(matrix)
+    
+    print("\nEigen Values:")
+    print(np.round(eigenvalues, 4))
+    
+    # Normalize eigenvectors
+    for i in range(eigenvectors.shape[0]):
+       norm = eigenvectors[i][i]
+       eigenvectors[i] = eigenvectors[i] / norm
+       
+    print("\nNormalized Eigen Vectors:")
+    print(np.round(eigenvectors, 4))
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
