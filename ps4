@@ -1,0 +1,384 @@
+direct_eig:-
+import numpy as np
+import sympy as sp
+
+
+def matrix_multiply(A, B):
+   C = A @ B
+   return C
+
+
+
+def find_eigenvalues(A):
+    #No of e_values
+    n = A.shape[0]
+    
+    #Create empty list of e_values
+    eigenvalues = np.zeros(n)
+    
+    for i in range(n):
+        
+        lambda_val = sp.symbols('lambda')
+        # A- lI
+        det_A_lambda_I = sp.det(sp.Matrix(A - lambda_val * np.eye(n)))
+        # det| A- lI|
+        eigenvalue = sp.solve(det_A_lambda_I, lambda_val)[i]
+        
+        #Append in e_val list 
+        eigenvalues[i] = eigenvalue  
+        
+    return eigenvalues
+
+
+def find_eigenvectors(A, eigenvalues,max_iter=1000, tol=1e-6):
+    #No of eig_vectors
+    n = A.shape[0]
+    #Init empty e_vals List[List]
+    eigenvectors = np.zeros((n, n))
+    
+    for i in range(n):
+        #Consider ith eigen value
+        lambda_val = eigenvalues[i]
+        #Finding A-lI with l = ith lambds val
+        A_lambda_I = A - lambda_val * np.eye(n)
+        #creating a normalsed vector 
+        v = np.ones(n) / np.sqrt(n)
+        
+        for _ in range(max_iter):
+            #Normalise it
+            v_new = matrix_multiply(A_lambda_I, v)
+            v_new = v_new / np.linalg.norm(v_new)   #OR np.sqrt(np.sum(v_new**2))
+            
+            #Break if tol is less
+            if np.linalg.norm(v - v_new) < tol:
+                break
+            v = v_new
+            
+        eigenvectors[:, i] = v
+    return eigenvectors
+
+
+
+# Get dynamic input for the matrix A
+n = int(input("Enter the size of the matrix (n x n): "))
+A = np.zeros((n, n))
+for i in range(n):
+    row_input = input(f"Enter row {i+1} of the matrix (space-separated values): ")
+    A[i, :] = [float(x) for x in row_input.split()]
+
+
+
+eigenvalues = find_eigenvalues(A)
+eigenvectors = find_eigenvectors(A, eigenvalues)
+
+
+print("Eigenvalues:")
+for i, eigenvalue in enumerate(eigenvalues):
+    print(f"Eigenvalue {i+1}: {eigenvalue}")
+
+
+print("\nEigenvectors:")
+for i, eigenvector in enumerate(eigenvectors.T):
+    print(f"Eigenvector {i+1}: {eigenvector}")
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+trace det eig:-
+from sympy import symbols
+import sympy as sp
+import numpy as np
+from sympy import N
+
+
+y = symbols('y')
+x1, x2, x3 = symbols('x1 x2 x3')
+
+
+def print_mat(mat):
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            print(mat[i][j], " ", end="")
+        print("")
+   
+    return  
+  
+       
+def solve_cubic(a, b, c, d):
+    coeffs = [a, b, c, d]
+    roots = np.roots(coeffs)
+    return roots
+
+
+def solve_quadratic(a, b, c):
+    discriminant = b**2 - 4*a*c
+    if discriminant < 0:
+        return "No real solutions"
+    elif discriminant == 0:
+        x = -b / (2*a)
+        return x
+    else:
+        x1 = (-b + discriminant**0.5) / (2*a)
+        x2 = (-b - discriminant**0.5) / (2*a)
+        return x1, x2
+   
+def eig_val(matrix,lambda_mat,c):
+   
+    #A-yI Matrix
+    y = symbols('y')
+    A = matrix - lambda_mat
+    print("Input Matrix:")
+    print_mat(np.array(matrix))
+
+
+    print("\ndet Matrix:")
+    print_mat(np.array(A))
+   
+    #Finding |A-yI|    
+    char_eq = A.det()
+    print("\nCharacteristic equation:\n",char_eq)
+   
+    coeffs = char_eq.as_coefficients_dict()
+   
+    roots=[]
+    if(c == 2):
+        a = coeffs.get(y**2,0)
+        b = coeffs.get(y,0)
+        c = coeffs.get(1,0)
+        roots = solve_quadratic(a, b, c)
+        if roots != "No real solutions":
+
+
+           l1, l2 = roots
+           l1 = round(l1, 3)
+           l2 = round(l2, 3)
+           print("Eigen values : \n", l1, ", ", l2)
+           roots = [l1, l2]
+       
+       
+    elif(c == 3):
+        a = coeffs.get(y**3,0)
+        b = coeffs.get(y**2,0)
+        c = coeffs.get(y,0)
+        d = coeffs.get(1,0)
+        roots = solve_cubic(a, b, c, d)
+        roots = [round(root, 3) for root in roots]
+        print("Eigen values : \n", roots)
+       
+    return A,roots      
+
+
+
+
+           
+def main():
+    c = int(input("Enter the order of the matrix : \n"))
+    matrix = np.zeros((c, c))
+    lambda_mat = []
+   
+   
+    #USER INPUT
+    print("Enter value for matrix: (space-separated values)\n ")
+  
+    for i in range(c):
+        row_input = input(f"Enter row {i+1} of the matrix : ")
+        matrix[i, :] = [float(x) for x in row_input.split()]
+       
+    #LAMBDA MATRIX (Lambda.I matrix)
+    for i in range(c):
+        row = []
+        for j in range(c):
+            if(i==j):
+                row.append(y)
+            else:
+                row.append(0)
+        lambda_mat.append(row)
+       
+    #Converting to Matrix
+    matrix = sp.Matrix(matrix)
+    lambda_mat = sp.Matrix(lambda_mat)
+   
+    A,eigen_value = eig_val(matrix, lambda_mat,c)
+    trace=0
+    det=1
+    for i in range(len(eigen_value)):
+        trace += eigen_value[i]
+        det *= eigen_value[i]
+    print("Trace =",trace,"\nDeterminant = ",det)
+       
+
+
+if __name__ == "__main__":
+    main()
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+power :-
+import numpy as np
+
+
+def power_method(A, num_iterations=100, tolerance=0.005):
+    n = A.shape[0]
+    b = [1]*len(A)  # initial vector
+    b = b / np.linalg.norm(b)  # normalize
+
+
+    for _ in range(num_iterations):
+        b_new = np.zeros(n)
+        for i in range(n):
+            for j in range(n):
+                b_new[i] += A[i, j] * b[j]
+        eigenvalue = np.dot(b_new, b)
+        b_new = b_new / np.linalg.norm(b_new)
+        if np.linalg.norm(b - b_new) < tolerance:
+            break
+        b = b_new
+
+
+    return eigenvalue, b
+
+
+def main():
+    n = int(input("Enter the order of the matrix: "))
+    A = np.zeros((n, n))
+
+
+    print("Enter the matrix elements:")
+    for i in range(n):
+        for j in range(n):
+            A[i, j] = float(input(f"Enter element [{i}][{j}]: "))
+
+
+    eigenvalue, eigenvector = power_method(A)
+    print("\nDominant  eigenvalue:", eigenvalue)
+    print("\nCorresponding eigenvector:", eigenvector)
+
+
+if __name__ == "__main__":
+    main()
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+quad mat power:-
+import numpy as np
+import sympy as sp
+
+
+def power_method(A, num_iterations=100, tolerance=0.05):
+    n = A.shape[0]
+    b = [1]*len(A)  # initial vector
+    b = b / np.linalg.norm(b)  # normalize
+
+
+ 
+    for _ in range(num_iterations):
+        b_new = np.zeros(n)
+        for i in range(n):
+            for j in range(n):
+                b_new[i] += A[i, j] * b[j]
+        eigenvalue = np.dot(b_new, b)
+        b_new = b_new / np.linalg.norm(b_new)
+        if np.linalg.norm(b - b_new) < tolerance:
+            break
+        b = b_new
+
+
+
+
+    return eigenvalue, b
+
+
+def eq_to_mat(num_variables):
+   
+    if num_variables == 1:
+        var = sp.symbols('x')
+        equation = input("Enter the quadratic equation in terms of x (e.g., x**2): \n")
+        equation = sp.sympify(equation)
+        A = np.array([[equation.coeff(var**2)]])
+    elif num_variables == 2:
+        var1, var2 = sp.symbols('x y')
+        equation = input("Enter the quadratic equation in terms of x and y (e.g., x**2 + 2*x*y + y**2):\n ")
+        equation = sp.sympify(equation)
+        A = np.array([[equation.coeff(var1**2), equation.coeff(var1*var2)],
+                      [equation.coeff(var1*var2), equation.coeff(var2**2)]])
+    elif num_variables == 3:
+        var1, var2, var3 = sp.symbols('x y z')
+        equation = input("Enter the quadratic equation in terms of x, y, and z (e.g., x**2 + 2*x*y + y**2 + 2*y*z + z**2): \n")
+        equation = sp.sympify(equation)
+        A = np.array([[equation.coeff(var1**2), equation.coeff(var1*var2), equation.coeff(var1*var3)],
+                      [equation.coeff(var1*var2), equation.coeff(var2**2), equation.coeff(var2*var3)],
+                      [equation.coeff(var1*var3), equation.coeff(var2*var3), equation.coeff(var3**2)]])
+    else:
+        print("Invalid number of variables.")
+        return
+    return A
+
+
+
+
+def main():
+    num_variables = int(input("Enter the number of independent variables (1, 2, or 3): "))
+
+
+    A = eq_to_mat(num_variables)
+   
+
+
+    print("\nMatrix form of the equation:")
+    print(A)
+
+
+    eigenvalue, eigenvector = power_method(A)
+    print("\nDominant eigenvalue:", eigenvalue)
+    print("\nCorresponding eigenvector:", eigenvector)
+
+
+if __name__ == "__main__":
+    main()
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+inverse power:-
+import numpy as np
+
+
+def	inverse_power_method(A,num_iterations=100,tolerance=0.00001):
+    n = A.shape[0]
+    b = [1]*len(A)  # initial vector
+    b = b / np.linalg.norm(b)  # normalize
+
+
+    for _ in range(num_iterations):
+        b_new = np.zeros(n)
+        for i in range(n):
+            for j in range(n):
+                b_new[i] += A[i, j] * b[j]
+        eigenvalue = np.dot(b_new, b)
+        b_new = b_new / np.linalg.norm(b_new)
+        if np.linalg.norm(b - b_new) < tolerance:
+            break
+        b = b_new
+        print("eig :",eigenvalue,"vec = ",b)
+
+    return 1/eigenvalue, b
+
+# Get dynamic input for the matrix A
+n = int(input("Enter the size of the matrix (n x n): "))
+B = np.zeros((n, n))
+for i in range(n):
+    for j in range(n):
+        B[i, j] = float(input(f"Enter element ({i},{j}) of the matrix: "))
+
+
+
+print(B)
+print("Checking Singular or not")
+det = np.linalg.det(B)
+print("Det = ",det)
+if det == 0:
+    print("no Inverse exists")
+   
+else:
+    A = np.linalg.inv(B)
+    print("\n",A)
+
+
+    # Find the smallest eigenvalue and its corresponding eigenvector
+    eigenvalue, eigenvector = inverse_power_method(A)
+   
+    print("Smallest eigenvalue:", eigenvalue)
+    print("Corresponding eigenvector:", eigenvector)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
