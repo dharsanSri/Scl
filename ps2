@@ -1,0 +1,100 @@
+graffe method
+import numpy as np
+import matplotlib.pyplot as plt
+
+tol = 0.01
+
+
+def polynomial_value(coeff, x):
+    return sum(c * x**i for i, c in enumerate(coeff))
+
+
+def plot_function(coeff,roots):
+    x_vals = np.linspace(-10, 10, 500)
+    y_vals = [polynomial_value(coeff, x) for x in x_vals]
+
+    plt.plot(x_vals, y_vals, label='Polynomial Function')
+    plt.axhline(0, color='black', linewidth=0.5)
+    plt.scatter(roots, [0]*len(roots), color='red', zorder=5, label='Approximated Roots')
+              #  x   ,     y   - coordinate
+    plt.title('Polynomial Function and Approximated Roots')
+    plt.xlabel('x')
+    plt.ylabel('f(x)')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+
+def graeffe_method(a,n):
+    
+    m = 1  #to maintain 2**mth root for mth iteration
+    prev_roots = [float('inf')] * n
+    
+    while True:
+        b = [0]*(n+1)
+        for i in range(0,n+1):
+            if(i==0 or i==n):
+                b[i] = (a[i])**2
+            else:
+                if(i<=n/2):
+                    b[i] = a[i]**2
+                    k=1
+                    while k<=i :
+                        b[i] += ((-1)**(k)) * 2*a[i-k]*a[i+k]
+                        k += 1
+                else:
+                    b[i] = a[i]**2
+                    k=1
+                    while k<(n-i+1):
+                        b[i] += ((-1)**(k)) * 2*a[i-k]*a[i+k]
+                        k += 1
+                        
+        #print("b: ",b)                  #b0,b1,b2,...,bn-1,bn      
+   
+        roots = [0]*n
+        for i in range(0,n):
+            p = b[n-i-1]
+            q = b[n-i]         
+            if q==0:
+                print("Division by zero error!")
+                print("Graeffe root squaring method is not applicable!")
+                return
+            roots[i] = (p/q)**(1/(2**m))
+       
+        
+        # Check convergence
+        if all(abs(roots[i] - prev_roots[i]) <= tol for i in range(n)):
+            break
+
+        prev_roots = roots        
+        m += 1
+        a = b
+    
+    return roots
+   
+   
+if __name__=='__main__':  
+   
+    n = int(input("Enter n for nth degree polynomial: "))
+
+    a = []
+    for i in range(n,0,-1):
+        x = float(input(f"Enter the coefficient of x**{i}: "))
+        a.append(x)
+    x = float(input("Enter the constant: "))
+    a.append(x)
+    a = list(reversed(a))
+    
+    abs_roots = graeffe_method(a,n) 
+    
+
+    roots = []
+    if(abs_roots):
+        for r in abs_roots:
+            if abs(polynomial_value(a, r)) <= tol:
+                roots.append(r)
+            else:
+                roots.append(-r)
+        print("\nApproximate Roots: ", roots)
+    
+    plot_function(a,roots)
