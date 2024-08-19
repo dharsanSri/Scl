@@ -1,0 +1,1456 @@
+
+bisection method:-
+import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+
+def bisection(f, a, b, tol=0.001):
+"""
+Find the root of an equation using the Bisection method.
+
+Parameters:
+f (SymPy expression): The equation to solve.
+a (float): The lower bound.
+b (float): The upper bound.
+tol (float, optional): The tolerance. Defaults to 0.001.
+
+Returns:
+float: The root of the equation.
+"""
+f_lambda = sp.lambdify(x, f, 'numpy') # Create a lambda function for efficient evaluation
+
+while abs(b - a) > tol:
+c = a + (b - a) / 2
+if f_lambda(a) * f_lambda(c) < 0:
+b = c
+else:
+a = c
+
+return c
+
+def plot_function(f, a, b):
+x = np.linspace(a, b, 400)
+y = sp.lambdify('x', f, 'numpy')(x)
+plt.plot(x, y)
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.title('Plot of f(x)')
+plt.grid(True)
+plt.axhline(0, color='black')
+plt.show()
+
+def main():
+# Get user input
+a = float(input("Enter lower bound: "))
+b = float(input("Enter upper bound: "))
+eqn = input("Enter equation: ")
+
+# Validate input
+if a >= b:
+raise ValueError("Invalid bounds. Lower bound must be less than upper bound.")
+
+eqn = eqn.replace('^', '**') # Replace ^ with ** for exponentiation
+eqn = eqn.replace('−', '-')
+
+# Convert equation to SymPy expression
+f = sp.sympify(eqn)
+# Find the root
+root = bisection(f, a, b)
+
+print("Root:", root)
+plot_function(f, a, b)
+if __name__ == "__main__":
+main()
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+regular falsi:-
+import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+
+def bisection(f, a, b, tol=0.001):
+"""
+Find the root of an equation using the Bisection method.
+
+Parameters:
+f (SymPy expression): The equation to solve.
+a (float): The lower bound.
+b (float): The upper bound.
+tol (float, optional): The tolerance. Defaults to 0.001.
+
+Returns:
+float: The root of the equation.
+"""
+f_lambda = sp.lambdify(x, f, 'numpy') # Create a lambda function for efficient evaluation
+
+while abs(b - a) > tol:
+c = a + (b - a) / 2
+if f_lambda(a) * f_lambda(c) < 0:
+b = c
+else:
+a = c
+
+return c
+
+def plot_function(f, a, b):
+x = np.linspace(a, b, 400)
+y = sp.lambdify('x', f, 'numpy')(x)
+plt.plot(x, y)
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.title('Plot of f(x)')
+plt.grid(True)
+plt.axhline(0, color='black')
+plt.show()
+
+def main():
+# Get user input
+a = float(input("Enter lower bound: "))
+b = float(input("Enter upper bound: "))
+eqn = input("Enter equation: ")
+
+# Validate input
+if a >= b:
+raise ValueError("Invalid bounds. Lower bound must be less than upper bound.")
+
+eqn = eqn.replace('^', '**') # Replace ^ with ** for exponentiation
+eqn = eqn.replace('−', '-')
+
+# Convert equation to SymPy expression
+f = sp.sympify(eqn)
+# Find the root
+root = bisection(f, a, b)
+
+print("Root:", root)
+plot_function(f, a, b)
+if __name__ == "__main__":
+main()
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+
+def bisection(f, a, b, tol=0.001):
+"""
+Find the root of an equation using the Bisection method.
+
+Parameters:
+f (SymPy expression): The equation to solve.
+a (float): The lower bound.
+b (float): The upper bound.
+tol (float, optional): The tolerance. Defaults to 0.001.
+
+Returns:
+float: The root of the equation.
+"""
+f_lambda = sp.lambdify(x, f, 'numpy') # Create a lambda function for efficient evaluation
+
+while abs(b - a) > tol:
+c = a + (b - a) / 2
+if f_lambda(a) * f_lambda(c) < 0:
+b = c
+else:
+a = c
+
+return c
+
+def plot_function(f, a, b):
+x = np.linspace(a, b, 400)
+y = sp.lambdify('x', f, 'numpy')(x)
+plt.plot(x, y)
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.title('Plot of f(x)')
+plt.grid(True)
+plt.axhline(0, color='black')
+plt.show()
+
+def main():
+# Get user input
+a = float(input("Enter lower bound: "))
+b = float(input("Enter upper bound: "))
+eqn = input("Enter equation: ")
+
+# Validate input
+if a >= b:
+raise ValueError("Invalid bounds. Lower bound must be less than upper bound.")
+
+eqn = eqn.replace('^', '**') # Replace ^ with ** for exponentiation
+eqn = eqn.replace('−', '-')
+
+# Convert equation to SymPy expression
+f = sp.sympify(eqn)
+# Find the root
+root = bisection(f, a, b)
+
+print("Root:", root)
+plot_function(f, a, b)
+if __name__ == "__main__":
+main()
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+fixed point:
+import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+
+def bisection(f, a, b, tol=0.001):
+"""
+Find the root of an equation using the Bisection method.
+
+Parameters:
+f (SymPy expression): The equation to solve.
+a (float): The lower bound.
+b (float): The upper bound.
+tol (float, optional): The tolerance. Defaults to 0.001.
+
+Returns:
+float: The root of the equation.
+"""
+f_lambda = sp.lambdify(x, f, 'numpy') # Create a lambda function for efficient evaluation
+
+while abs(b - a) > tol:
+c = a + (b - a) / 2
+if f_lambda(a) * f_lambda(c) < 0:
+b = c
+else:
+a = c
+
+return c
+
+def plot_function(f, a, b):
+x = np.linspace(a, b, 400)
+y = sp.lambdify('x', f, 'numpy')(x)
+plt.plot(x, y)
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.title('Plot of f(x)')
+plt.grid(True)
+plt.axhline(0, color='black')
+plt.show()
+
+def main():
+# Get user input
+a = float(input("Enter lower bound: "))
+b = float(input("Enter upper bound: "))
+eqn = input("Enter equation: ")
+
+# Validate input
+if a >= b:
+raise ValueError("Invalid bounds. Lower bound must be less than upper bound.")
+
+eqn = eqn.replace('^', '**') # Replace ^ with ** for exponentiation
+eqn = eqn.replace('−', '-')
+
+# Convert equation to SymPy expression
+f = sp.sympify(eqn)
+# Find the root
+root = bisection(f, a, b)
+
+print("Root:", root)
+plot_function(f, a, b)
+if __name__ == "__main__":
+main()
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+graffe method
+import numpy as np
+import matplotlib.pyplot as plt
+
+tol = 0.01
+
+
+def polynomial_value(coeff, x):
+return sum(c * x**i for i, c in enumerate(coeff))
+
+
+def plot_function(coeff,roots):
+x_vals = np.linspace(-10, 10, 500)
+y_vals = [polynomial_value(coeff, x) for x in x_vals]
+
+plt.plot(x_vals, y_vals, label='Polynomial Function')
+plt.axhline(0, color='black', linewidth=0.5)
+plt.scatter(roots, [0]*len(roots), color='red', zorder=5, label='Approximated Roots')
+# x , y - coordinate
+plt.title('Polynomial Function and Approximated Roots')
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+def graeffe_method(a,n):
+
+m = 1 #to maintain 2**mth root for mth iteration
+prev_roots = [float('inf')] * n
+
+while True:
+b = [0]*(n+1)
+for i in range(0,n+1):
+if(i==0 or i==n):
+b[i] = (a[i])**2
+else:
+if(i<=n/2):
+b[i] = a[i]**2
+k=1
+while k<=i :
+b[i] += ((-1)**(k)) * 2*a[i-k]*a[i+k]
+k += 1
+else:
+b[i] = a[i]**2
+k=1
+while k<(n-i+1):
+b[i] += ((-1)**(k)) * 2*a[i-k]*a[i+k]
+k += 1
+
+#print("b: ",b) #b0,b1,b2,...,bn-1,bn
+
+roots = [0]*n
+for i in range(0,n):
+p = b[n-i-1]
+q = b[n-i]
+if q==0:
+print("Division by zero error!")
+print("Graeffe root squaring method is not applicable!")
+return
+roots[i] = (p/q)**(1/(2**m))
+
+
+# Check convergence
+if all(abs(roots[i] - prev_roots[i]) <= tol for i in range(n)):
+break
+
+prev_roots = roots
+m += 1
+a = b
+
+return roots
+
+
+if __name__=='__main__':
+
+n = int(input("Enter n for nth degree polynomial: "))
+
+a = []
+for i in range(n,0,-1):
+x = float(input(f"Enter the coefficient of x**{i}: "))
+a.append(x)
+x = float(input("Enter the constant: "))
+a.append(x)
+a = list(reversed(a))
+
+abs_roots = graeffe_method(a,n)
+
+
+roots = []
+if(abs_roots):
+for r in abs_roots:
+if abs(polynomial_value(a, r)) <= tol:
+roots.append(r)
+else:
+roots.append(-r)
+print("\nApproximate Roots: ", roots)
+
+plot_function(a,roots)
+
+------------------------------------------------------------------------------------------------
+
+augumented matrix:
+import sympy as sp
+
+def get_equation():
+equation = input("Enter equation (e.g. 2*x1 + 3*x2 = 7): ")
+lhs, rhs = equation.split('=')
+lhs = sp.sympify(lhs)
+rhs = sp.sympify(rhs)
+return lhs, rhs
+
+def print_matrix(matrix):
+for row in matrix:
+print(" ".join(f"{num:.1f}" for num in row))
+
+def create_augmented_matrix(num_equations, num_variables):
+variables = [f"x{i}" for i in range(1, num_variables + 1)]
+vars = sp.symbols(' '.join(variables))
+
+matrix = []
+for i in range(num_equations):
+lhs, rhs = get_equation()
+row = [lhs.coeff(var) for var in vars] + [rhs]
+matrix.append(row)
+
+matrix = sp.Matrix(matrix)
+return matrix
+
+def main():
+num_equations = int(input("Enter the number of equations: "))
+num_variables = int(input("Enter the number of variables: "))
+
+matrix = create_augmented_matrix(num_equations, num_variables)
+print("Augmented Matrix:")
+print(matrix)
+
+if __name__ == "__main__":
+main()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+check echoleon form :-
+import sympy
+import numpy
+
+def CheckEcholenForm():
+number_of_rows = int(input('Enter the number of rows : '))
+number_of_columns = int(input('Enter the number of columns : '))
+
+print('Enter the list of elements : ',end = '')
+entries = list(map(int,input().split()))
+
+matrix = numpy.array(entries).reshape(number_of_rows,number_of_columns)
+print(matrix)
+
+for i in range(number_of_rows):
+if len(numpy.where(matrix[i,:i] != 0)[0]) != 0:
+if len(numpy.where(matrix[i,:i] == 0)[0]) < i :
+print('The Matrix is not in REF and not in RREF')
+return
+
+print('The Given Matrix is in REF')
+
+for i in range(number_of_rows):
+if len(numpy.where(matrix[i,:] == 1)[0]) != 0:
+index = numpy.where(matrix[i,:] == 1)[0][0]
+if len(numpy.where(matrix[:,index] == 0)[0]) != number_of_rows - 1 and matrix[i,index] == 1:
+print('The Given Matrix is not in RREF')
+return
+print('The Given Matrix is in RREF')
+
+if __name__=='__main__':
+values = 0
+CheckEcholenForm()
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+jordan elimination:-
+import numpy as np
+
+def gauss_jordan_elimination(matrix, tol=1e-12):
+A = np.copy(matrix)
+rows, cols = A.shape
+rank = 0
+
+for col in range(cols):
+if rank >= rows:
+break
+
+# Find the pivot row
+pivot_row = None
+for row in range(rank, rows):
+if abs(A[row, col]) > tol:
+pivot_row = row
+break
+
+if pivot_row is None:
+continue
+
+# Swap the pivot row with the current row
+A[[rank, pivot_row]] = A[[pivot_row, rank]]
+
+# Normalize the pivot row
+A[rank] = A[rank] / A[rank, col]
+
+# Eliminate all other entries in the pivot column
+for row in range(rows):
+if row != rank:
+A[row] -= A[row, col] * A[rank]
+
+rank += 1
+
+# Round very small values to zero
+A[np.abs(A) < tol] = 0
+
+return A, rank
+
+
+if __name__=='__main__':
+
+m = int(input("Enter no. of rows: "))
+n = int(input("Enter no. of columns: "))
+
+
+print("Enter the elements of the matrix in single line seperated by space: ")
+entries = list(map(float, input().split()))
+
+matrix = np.array(entries).reshape(m, n)
+print(f"\nGiven matrix:")
+print(matrix)
+
+rref,rank = gauss_jordan_elimination(matrix)
+print(f"\nRREF:")
+print(rref)
+
+print(f"\nRank: {rank}")
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+find solution:-
+import sympy as sp
+import numpy as np
+
+def Augumented_matrix(matrix, eqns, x, no_eq, no_unknowns):
+for i in range(no_eq):
+eq = sp.sympify(eqns[i][0])
+for j in range(no_unknowns):
+matrix[i,j] = eq.coeff(x[j],1) #coeff(term,degree)
+matrix[i,no_unknowns] = float(eqns[i][1]) #for constant term
+return matrix
+
+def find_rref(matrix, tol=1e-12):
+A = np.copy(matrix)
+rows, cols = A.shape
+rank = 0
+
+for col in range(cols):
+if rank >= rows:
+break
+# Find the pivot row
+pivot_row = None
+for row in range(rank, rows):
+if abs(A[row, col]) > tol:
+pivot_row = row
+break
+
+if pivot_row is None:
+continue
+
+# Swap the pivot row with the current row
+A[[rank, pivot_row]] = A[[pivot_row, rank]]
+# Normalize the pivot row
+A[rank] = A[rank] / A[rank, col]
+
+# Eliminate all other entries in the pivot column
+for row in range(rows):
+if row != rank:
+A[row] -= A[row, col] * A[rank]
+
+rank += 1
+
+# Round very small values to zero
+A[np.abs(A) < tol] = 0
+return A, rank
+
+def find_sol(eqns, x, no_eq, no_unknowns):
+matrix = np.zeros([no_eq, no_unknowns + 1])
+matrix = Augumented_matrix(matrix, eqns, x, no_eq, no_unknowns)
+rref, rank = find_rref(matrix)
+
+if rank < no_eq:
+print("The given system of equations have 'No solution'")
+return None
+
+else:
+equations = []
+solutions = []
+
+for i in range(no_eq):
+# Construct the left-hand side of the equation
+lhs_terms = []
+for j in range(no_unknowns):
+term = f'({rref[i, j]})*{x[j]}'
+lhs_terms.append(term)
+lhs = " + ".join(lhs_terms)
+
+# Create the equation using SymPy
+equation = sp.Eq(sp.sympify(lhs), rref[i, -1])
+equations.append(equation)
+
+
+print(f"\nThe solution:")
+for i in range(no_eq):
+solutions.append(list(sp.solveset(equations[i],x[i]))[0])
+if no_eq == no_unknowns:
+print(f'x{i+1} = {solutions[-1]}')
+
+
+if no_eq < no_unknowns:
+print("The given system has infinite solution!")
+free_var = no_unknowns - no_eq
+t = [sp.symbols(f't{i}') for i in range(1,free_var+1)]
+
+k=1
+for sol in solutions:
+for j in range(free_var):
+solution = sol.subs(x[no_eq + j],t[j])
+print(f'x{k} = {solution}')
+k += 1
+#printing range
+print('For all ',end = '')
+free_var_list = [f'x{no_eq + i + 1} = t{i + 1}' for i in range(free_var)]
+free_vars_string = ', '.join(free_var_list) + ' >= 0'
+print(free_vars_string)
+
+return solutions
+
+if __name__ == '__main__':
+no_eq = int(input("Enter no. of equations: "))
+no_unknowns = int(input("Enter no. of unknowns: "))
+
+x = [sp.symbols(f'x{i}') for i in range(1,no_unknowns+1)]
+
+eqns = []
+
+print(f"\nEnter equations in terms of x1,x2,x3,...")
+for i in range(1,no_eq+1):
+eq = input(f"Enter Eq{i}: ")
+eqns.append(eq.split('='))
+
+for i in range(no_eq):
+eqns[i][0] = eqns[i][0].replace(" ", "") # remove spaces from the equation
+
+solutions = find_sol(eqns, x, no_eq, no_unknowns)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+seidal:-
+import numpy as np
+
+def print_iteration(iteration, values):
+print(f"{iteration:<10}{' '.join(f'{value:10.6f}' for value in values)}")
+
+def gauss_seidel(coefficients, constants, initial_guess, tolerance, max_iterations):
+n = len(constants)
+x = initial_guess.copy()
+
+print("\nIteration Table:")
+print("{:<10}{}".format("Iteration", "Values"))
+
+for iteration in range(1, max_iterations + 1):
+maxdiff = 0
+x_new = x.copy()
+
+for i in range(n):
+sum_ = sum(coefficients[i][j] * x_new[j] if j != i else 0 for j in range(n))
+y = (constants[i] - sum_) / coefficients[i][i]
+
+diff = abs(y - x[i])
+if diff > maxdiff:
+maxdiff = diff
+
+x[i] = y
+
+print_iteration(iteration, x)
+
+if maxdiff < tolerance:
+return x
+
+return x
+
+def verify_solution(coefficients, constants, solution):
+n = len(constants)
+for i in range(n):
+sum_ = sum(coefficients[i][j] * solution[j] for j in range(n))
+result = sum_ - constants[i]
+print(f"Equation {i+1}: {result:.6f} ~= 0")
+
+def q5():
+n = int(input("Enter the number of variables: "))
+
+print("Enter the coefficients matrix:")
+coefficients = []
+for i in range(n):
+row = list(map(float, input(f"Enter row {i + 1}: ").split()))
+coefficients.append(row)
+
+print("Enter the constants vector:")
+constants = list(map(float, input().split()))
+
+print("Enter the initial guess:")
+initial_guess = list(map(float, input().split()))
+
+tolerance = 0.001
+max_iterations = int(input("Enter the maximum number of iterations: "))
+
+print("\nInitial Guess:")
+print_iteration(0, initial_guess)
+
+solution = gauss_seidel(coefficients, constants, initial_guess, tolerance, max_iterations)
+
+print("\nFinal Solution:")
+print_iteration("Final", solution)
+
+print("\nVerifying Solution:")
+verify_solution(coefficients, constants, solution)
+
+if __name__ == "__main__":
+q5()
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+jordan:-
+import numpy as np
+
+def print_iteration(iteration, values):
+print(f"{iteration:<10}{' '.join(f'{value:10.6f}' for value in values)}")
+
+def gauss_jordan(coefficients, constants, tolerance):
+n = len(constants)
+augmented_matrix = np.column_stack((coefficients, constants))
+
+print("\nAugmented Matrix:")
+print(augmented_matrix)
+
+for i in range(n):
+pivot = augmented_matrix[i][i]
+augmented_matrix[i] = augmented_matrix[i] / pivot
+
+for j in range(n):
+if i != j:
+multiplier = augmented_matrix[j][i]
+augmented_matrix[j] = augmented_matrix[j] - multiplier * augmented_matrix[i]
+
+print(f"\nIteration {i+1}:")
+print(augmented_matrix)
+
+solution = augmented_matrix[:, -1]
+return solution
+
+def verify_solution(coefficients, constants, solution):
+n = len(constants)
+for i in range(n):
+sum_ = sum(coefficients[i][j] * solution[j] for j in range(n))
+result = sum_ - constants[i]
+print(f"Equation {i+1}: {result:.6f} ~= 0")
+
+def q6():
+n = int(input("Enter the number of variables: "))
+
+print("Enter the coefficients matrix:")
+coefficients = []
+for i in range(n):
+row = list(map(float, input(f"Enter row {i + 1}: ").split()))
+coefficients.append(row)
+
+print("Enter the constants vector:")
+constants = list(map(float, input().split()))
+
+tolerance = 0.001
+
+print("\nAugmented Matrix:")
+solution = gauss_jordan(coefficients, constants, tolerance)
+
+print("\nFinal Solution:")
+print(solution)
+
+print("\nVerifying Solution:")
+verify_solution(coefficients, constants, solution)
+
+if __name__ == "__main__":
+q6()
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+jordan inverse:-
+import numpy as np
+
+def gauss_jordan_inverse(matrix, tol=1e-12):
+A = np.copy(matrix)
+rows, cols = A.shape
+rank = 0
+
+for col in range(cols):
+if rank >= rows:
+break
+
+pivot_row = None
+for row in range(rank, rows):
+if abs(A[row, col]) > tol:
+pivot_row = row
+break
+
+if pivot_row is None:
+continue
+
+A[[rank, pivot_row]] = A[[pivot_row, rank]]
+A[rank] = A[rank] / A[rank, col]
+
+for row in range(rows):
+if row != rank:
+A[row] -= A[row, col] * A[rank]
+
+rank += 1
+
+A[np.abs(A) < tol] = 0
+
+return A, rank
+
+
+if __name__=='__main__':
+
+m = int(input("Enter no. of rows: "))
+n = int(input("Enter no. of columns: "))
+
+print("Enter the elements of the matrix in single line seperated by space: ")
+entries = list(map(float, input().split()))
+
+matrix = np.array(entries).reshape(m, n)
+print(f"\nGiven matrix:")
+print(matrix)
+
+
+if m!=n:
+print("The matrix is not square matrix!")
+print("Inverse cannot be found")
+
+else:
+#creating identity matrix for the matrix of given shape
+identity_matrix = np.eye(matrix.shape[0])
+result_matrix = np.hstack((matrix, identity_matrix))
+
+result_matrix_size = result_matrix.shape[0]
+
+solved_matrix,rank = gauss_jordan_inverse(result_matrix)
+inv_matrix = solved_matrix[:, result_matrix_size:]
+
+print(f"\nInverse matrix:")
+print(inv_matrix)
+
+print(f"\nRank: {rank}")
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+input
+import numpy as np
+import sympy as sp
+
+eqns = []
+
+no_eq = int(input("Enter no. of equations: "))
+no_unknowns = int(input("Enter no. of unknowns: "))
+x = [sp.symbols(f'x{i}') for i in range(1,no_unknowns+1)]
+
+def matrix_input():
+m = int(input("Enter no. of rows: "))
+n = int(input("Enter no. of columns: "))
+
+print("Enter the elements of the matrix in single line seperated by space: ")
+entries = list(map(float, input().split()))
+
+matrix = np.array(entries).reshape(m, n)
+print(f"\nGiven matrix:")
+print(matrix)
+return matrix
+
+
+def equations_input():
+print(f"\nEnter equations in terms of x1,x2,x3,...")
+for i in range(1,no_eq+1):
+eq = input(f"Enter Eq{i}: ")
+eqns.append(eq.split('='))
+
+matrix = np.zeros([no_eq, no_unknowns + 1])
+matrix = Augumented_matrix(matrix)
+return matrix
+
+
+def Augumented_matrix(matrix):
+for i in range(no_eq):
+eq = sp.sympify(eqns[i][0])
+for j in range(no_unknowns):
+matrix[i,j] = eq.coeff(x[j],1) #coeff(term,degree)
+matrix[i,no_unknowns] = float(eqns[i][1]) #for constant term
+return matrix
+
+
+def convert_RREF(matrix):
+mat = sp.Matrix(matrix)
+M_rref, pivot_columns = mat.rref()
+print(f"\nThe Reduced Row Echelon Form (RREF) is:")
+print(M_rref)
+
+
+def convert_REF(matrix):
+mat = sp.Matrix(matrix)
+ref = mat.echelon_form()
+print(f"\nThe Row Echelon Form (REF) is:")
+print(ref)
+
+
+def inverse(matrix):
+print(np.linalg.inv(matrix))
+
+
+def solving_Eqns():
+lhs = []
+rhs = []
+print(f"\nEnter equations in terms of x1,x2,x3,...")
+for i in range(1,no_eq+1):
+eq = input(f"Enter Eq{i}: ")
+lhs.append(eq.split('=')[0].strip())
+rhs.append(eq.split('=')[1].strip())
+#solving eqns
+sol = np.linalg.solve(lhs, rhs)
+print(sol)
+
+
+if __name__=='__main__':
+
+matrix = equations_input()
+matrix = matrix_input()
+
+matrix = Augumented_matrix(matrix)
+
+convert_RREF(matrix)
+convert_REF(matrix)
+inverse(matrix)
+solving_Eqns()
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+direct_eig:-
+import numpy as np
+import sympy as sp
+
+
+def matrix_multiply(A, B):
+C = A @ B
+return C
+
+
+
+def find_eigenvalues(A):
+#No of e_values
+n = A.shape[0]
+
+#Create empty list of e_values
+eigenvalues = np.zeros(n)
+
+for i in range(n):
+
+lambda_val = sp.symbols('lambda')
+# A- lI
+det_A_lambda_I = sp.det(sp.Matrix(A - lambda_val * np.eye(n)))
+# det| A- lI|
+eigenvalue = sp.solve(det_A_lambda_I, lambda_val)[i]
+
+#Append in e_val list
+eigenvalues[i] = eigenvalue
+
+return eigenvalues
+
+
+def find_eigenvectors(A, eigenvalues,max_iter=1000, tol=1e-6):
+#No of eig_vectors
+n = A.shape[0]
+#Init empty e_vals List[List]
+eigenvectors = np.zeros((n, n))
+
+for i in range(n):
+#Consider ith eigen value
+lambda_val = eigenvalues[i]
+#Finding A-lI with l = ith lambds val
+A_lambda_I = A - lambda_val * np.eye(n)
+#creating a normalsed vector
+v = np.ones(n) / np.sqrt(n)
+
+for _ in range(max_iter):
+#Normalise it
+v_new = matrix_multiply(A_lambda_I, v)
+v_new = v_new / np.linalg.norm(v_new) #OR np.sqrt(np.sum(v_new**2))
+
+#Break if tol is less
+if np.linalg.norm(v - v_new) < tol:
+break
+v = v_new
+
+eigenvectors[:, i] = v
+return eigenvectors
+
+
+
+# Get dynamic input for the matrix A
+n = int(input("Enter the size of the matrix (n x n): "))
+A = np.zeros((n, n))
+for i in range(n):
+row_input = input(f"Enter row {i+1} of the matrix (space-separated values): ")
+A[i, :] = [float(x) for x in row_input.split()]
+
+
+
+eigenvalues = find_eigenvalues(A)
+eigenvectors = find_eigenvectors(A, eigenvalues)
+
+
+print("Eigenvalues:")
+for i, eigenvalue in enumerate(eigenvalues):
+print(f"Eigenvalue {i+1}: {eigenvalue}")
+
+
+print("\nEigenvectors:")
+for i, eigenvector in enumerate(eigenvectors.T):
+print(f"Eigenvector {i+1}: {eigenvector}")
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+trace det eig:-
+from sympy import symbols
+import sympy as sp
+import numpy as np
+from sympy import N
+
+
+y = symbols('y')
+x1, x2, x3 = symbols('x1 x2 x3')
+
+
+def print_mat(mat):
+for i in range(len(mat)):
+for j in range(len(mat[i])):
+print(mat[i][j], " ", end="")
+print("")
+
+return
+
+
+def solve_cubic(a, b, c, d):
+coeffs = [a, b, c, d]
+roots = np.roots(coeffs)
+return roots
+
+
+def solve_quadratic(a, b, c):
+discriminant = b**2 - 4*a*c
+if discriminant < 0:
+return "No real solutions"
+elif discriminant == 0:
+x = -b / (2*a)
+return x
+else:
+x1 = (-b + discriminant**0.5) / (2*a)
+x2 = (-b - discriminant**0.5) / (2*a)
+return x1, x2
+
+def eig_val(matrix,lambda_mat,c):
+
+#A-yI Matrix
+y = symbols('y')
+A = matrix - lambda_mat
+print("Input Matrix:")
+print_mat(np.array(matrix))
+
+
+print("\ndet Matrix:")
+print_mat(np.array(A))
+
+#Finding |A-yI|
+char_eq = A.det()
+print("\nCharacteristic equation:\n",char_eq)
+
+coeffs = char_eq.as_coefficients_dict()
+
+roots=[]
+if(c == 2):
+a = coeffs.get(y**2,0)
+b = coeffs.get(y,0)
+c = coeffs.get(1,0)
+roots = solve_quadratic(a, b, c)
+if roots != "No real solutions":
+
+
+l1, l2 = roots
+l1 = round(l1, 3)
+l2 = round(l2, 3)
+print("Eigen values : \n", l1, ", ", l2)
+roots = [l1, l2]
+
+
+elif(c == 3):
+a = coeffs.get(y**3,0)
+b = coeffs.get(y**2,0)
+c = coeffs.get(y,0)
+d = coeffs.get(1,0)
+roots = solve_cubic(a, b, c, d)
+roots = [round(root, 3) for root in roots]
+print("Eigen values : \n", roots)
+
+return A,roots
+
+
+
+
+
+def main():
+c = int(input("Enter the order of the matrix : \n"))
+matrix = np.zeros((c, c))
+lambda_mat = []
+
+
+#USER INPUT
+print("Enter value for matrix: (space-separated values)\n ")
+
+for i in range(c):
+row_input = input(f"Enter row {i+1} of the matrix : ")
+matrix[i, :] = [float(x) for x in row_input.split()]
+
+#LAMBDA MATRIX (Lambda.I matrix)
+for i in range(c):
+row = []
+for j in range(c):
+if(i==j):
+row.append(y)
+else:
+row.append(0)
+lambda_mat.append(row)
+
+#Converting to Matrix
+matrix = sp.Matrix(matrix)
+lambda_mat = sp.Matrix(lambda_mat)
+
+A,eigen_value = eig_val(matrix, lambda_mat,c)
+trace=0
+det=1
+for i in range(len(eigen_value)):
+trace += eigen_value[i]
+det *= eigen_value[i]
+print("Trace =",trace,"\nDeterminant = ",det)
+
+
+
+if __name__ == "__main__":
+main()
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+power :-
+import numpy as np
+
+
+def power_method(A, num_iterations=100, tolerance=0.005):
+n = A.shape[0]
+b = [1]*len(A) # initial vector
+b = b / np.linalg.norm(b) # normalize
+
+
+for _ in range(num_iterations):
+b_new = np.zeros(n)
+for i in range(n):
+for j in range(n):
+b_new[i] += A[i, j] * b[j]
+eigenvalue = np.dot(b_new, b)
+b_new = b_new / np.linalg.norm(b_new)
+if np.linalg.norm(b - b_new) < tolerance:
+break
+b = b_new
+
+
+return eigenvalue, b
+
+
+def main():
+n = int(input("Enter the order of the matrix: "))
+A = np.zeros((n, n))
+
+
+print("Enter the matrix elements:")
+for i in range(n):
+for j in range(n):
+A[i, j] = float(input(f"Enter element [{i}][{j}]: "))
+
+
+eigenvalue, eigenvector = power_method(A)
+print("\nDominant eigenvalue:", eigenvalue)
+print("\nCorresponding eigenvector:", eigenvector)
+
+
+if __name__ == "__main__":
+main()
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+quad mat power:-
+import numpy as np
+import sympy as sp
+
+
+def power_method(A, num_iterations=100, tolerance=0.05):
+n = A.shape[0]
+b = [1]*len(A) # initial vector
+b = b / np.linalg.norm(b) # normalize
+
+
+
+for _ in range(num_iterations):
+b_new = np.zeros(n)
+for i in range(n):
+for j in range(n):
+b_new[i] += A[i, j] * b[j]
+eigenvalue = np.dot(b_new, b)
+b_new = b_new / np.linalg.norm(b_new)
+if np.linalg.norm(b - b_new) < tolerance:
+break
+b = b_new
+
+
+
+
+return eigenvalue, b
+
+
+def eq_to_mat(num_variables):
+
+if num_variables == 1:
+var = sp.symbols('x')
+equation = input("Enter the quadratic equation in terms of x (e.g., x**2): \n")
+equation = sp.sympify(equation)
+A = np.array([[equation.coeff(var**2)]])
+elif num_variables == 2:
+var1, var2 = sp.symbols('x y')
+equation = input("Enter the quadratic equation in terms of x and y (e.g., x**2 + 2*x*y + y**2):\n ")
+equation = sp.sympify(equation)
+A = np.array([[equation.coeff(var1**2), equation.coeff(var1*var2)],
+[equation.coeff(var1*var2), equation.coeff(var2**2)]])
+elif num_variables == 3:
+var1, var2, var3 = sp.symbols('x y z')
+equation = input("Enter the quadratic equation in terms of x, y, and z (e.g., x**2 + 2*x*y + y**2 + 2*y*z + z**2): \n")
+equation = sp.sympify(equation)
+A = np.array([[equation.coeff(var1**2), equation.coeff(var1*var2), equation.coeff(var1*var3)],
+[equation.coeff(var1*var2), equation.coeff(var2**2), equation.coeff(var2*var3)],
+[equation.coeff(var1*var3), equation.coeff(var2*var3), equation.coeff(var3**2)]])
+else:
+print("Invalid number of variables.")
+return
+return A
+
+
+
+
+def main():
+num_variables = int(input("Enter the number of independent variables (1, 2, or 3): "))
+
+
+A = eq_to_mat(num_variables)
+
+
+
+print("\nMatrix form of the equation:")
+print(A)
+
+
+eigenvalue, eigenvector = power_method(A)
+print("\nDominant eigenvalue:", eigenvalue)
+print("\nCorresponding eigenvector:", eigenvector)
+
+
+if __name__ == "__main__":
+main()
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+inverse power:-
+import numpy as np
+
+
+def inverse_power_method(A,num_iterations=100,tolerance=0.00001):
+n = A.shape[0]
+b = [1]*len(A) # initial vector
+b = b / np.linalg.norm(b) # normalize
+
+
+for _ in range(num_iterations):
+b_new = np.zeros(n)
+for i in range(n):
+for j in range(n):
+b_new[i] += A[i, j] * b[j]
+eigenvalue = np.dot(b_new, b)
+b_new = b_new / np.linalg.norm(b_new)
+if np.linalg.norm(b - b_new) < tolerance:
+break
+b = b_new
+print("eig :",eigenvalue,"vec = ",b)
+
+return 1/eigenvalue, b
+
+# Get dynamic input for the matrix A
+n = int(input("Enter the size of the matrix (n x n): "))
+B = np.zeros((n, n))
+for i in range(n):
+for j in range(n):
+B[i, j] = float(input(f"Enter element ({i},{j}) of the matrix: "))
+
+
+
+print(B)
+print("Checking Singular or not")
+det = np.linalg.det(B)
+print("Det = ",det)
+if det == 0:
+print("no Inverse exists")
+
+else:
+A = np.linalg.inv(B)
+print("\n",A)
+
+
+# Find the smallest eigenvalue and its corresponding eigenvector
+eigenvalue, eigenvector = inverse_power_method(A)
+
+print("Smallest eigenvalue:", eigenvalue)
+print("Corresponding eigenvector:", eigenvector)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+symm_check:-
+import numpy as np
+
+def get_matrix():
+order = int(input("Enter order of Square matrix: "))
+matrix = np.zeros((order, order))
+print(f"Enter elements of {order}x{order} matrix Rowwise\n")
+for i in range(order):
+print("Enter elements in Row (sep by space) ", i+1, ": ")
+row = [float(num) for num in input().split()]
+matrix[i] = row
+return matrix
+
+def print_matrix(matrix):
+for row in matrix:
+print(" ".join(f"{num:.4f}" for num in row))
+
+def check_symmetric(matrix):
+transpose = matrix.T
+print("The Transpose of A is:")
+print_matrix(transpose)
+if np.allclose(matrix, transpose):
+print("Yes Symmetric")
+else:
+print("Not Symmetric")
+
+# Main
+matrix = get_matrix()
+print("The input matrix is:")
+print_matrix(matrix)
+
+print("Checking if symmetric:")
+check_symmetric(matrix)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+orthogonal check:-
+import numpy as np
+
+def get_matrix():
+order = int(input("Enter order of Square matrix: "))
+matrix = np.zeros((order, order))
+print(f"Enter elements of {order}x{order} matrix Rowwise\n")
+for i in range(order):
+print("Enter elements in Row (sep by space) ", i+1, ": ")
+row = [float(num) for num in input().split()]
+matrix[i] = row
+return matrix
+
+def print_matrix(matrix):
+for row in matrix:
+print(" ".join(f"{num:.4f}" for num in row))
+
+def check_orthogonal(matrix):
+transpose = matrix.T
+product = matrix @ transpose
+print("If A^T = A^-1 it is orthogonal")
+print("i.e A.A^T = I")
+print_matrix(product)
+
+if np.allclose(product, np.eye(matrix.shape[0])):
+print("Yes Orthogonal")
+else:
+print("Not Orthogonal")
+
+# Main
+matrix = get_matrix()
+print("The input matrix is:")
+print_matrix(matrix)
+
+print("Checking if symmetric:")
+transpose = matrix.T
+if np.allclose(matrix, transpose):
+print("Yes Symmetric")
+else:
+print("Not Symmetric")
+
+print("Checking if orthogonal:")
+check_orthogonal(matrix)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+jacobi eig:-
+import numpy as np
+
+def get_matrix():
+order = int(input("Enter order of Square matrix: "))
+matrix = np.zeros((order, order))
+print(f"Enter elements of {order}x{order} matrix Rowwise\n")
+for i in range(order):
+for j in range(order):
+print(f"Enter element [{i+1}][{j+1}] : ")
+matrix[i, j] = float(input())
+return matrix
+
+def print_matrix(matrix):
+for row in matrix:
+print(" ".join(f"{num:.4f}" for num in row))
+
+def check_symmetric(matrix):
+transpose = matrix.T
+flag = 1
+print("The Transpose of A is:")
+print_matrix(transpose)
+if np.allclose(matrix, transpose):
+print("Yes Symmetric")
+else:
+print("Not Symmetric")
+flag = 0
+return flag
+
+def jacobi_method(A, tol=0, max_iter=100):
+A = np.copy(A)
+n = A.shape[0]
+R = np.eye(n)
+
+for _ in range(max_iter):
+# Find the largest off-diagonal absolute value
+off_diag_max = 0
+p, q = 0, 1
+for i in range(n):
+for j in range(i+1, n):
+if abs(A[i, j]) > off_diag_max:
+off_diag_max = abs(A[i, j])
+p, q = i, j
+
+if off_diag_max == tol:
+break
+
+if A[p, p] == A[q, q]:
+theta = np.pi / 4 if A[p, q] > 0 else -np.pi / 4
+else:
+theta = 0.5 * np.arctan2(2 * A[p, q], A[q, q] - A[p, p])
+cos_theta = round(np.cos(theta), 4)
+sin_theta = round(np.sin(theta), 4)
+
+J = np.eye(n)
+J[p, p] = cos_theta
+J[p, q] = -sin_theta
+J[q, p] = sin_theta
+J[q, q] = cos_theta
+
+# Update A and R
+A = np.round(J.T @ A @ J, 4)
+R = np.round(R @ J, 4)
+
+eigenvalues = np.diag(A)
+eigenvectors = R
+
+return eigenvalues, eigenvectors
+
+# Main
+matrix = get_matrix()
+print("\nThe input matrix is:\n")
+print_matrix(matrix)
+
+print("\nChecking if symmetric:\n")
+flag = check_symmetric(matrix)
+
+if flag:
+print("JACOBI\n")
+eigenvalues, eigenvectors = jacobi_method(matrix)
+
+print("\nEigen Values:")
+print(np.round(eigenvalues, 4))
+
+# Normalize eigenvectors
+for i in range(eigenvectors.shape[0]):
+norm = eigenvectors[i][i]
+eigenvectors[i] = eigenvectors[i] / norm
+
+print("\nNormalized Eigen Vectors:")
+print(np.round(eigenvectors, 4))
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
